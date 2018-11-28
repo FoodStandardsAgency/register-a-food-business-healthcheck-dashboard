@@ -1,0 +1,14 @@
+.wrapper {
+  display: grid;
+  grid-auto-rows: minmax(100px, auto);
+  grid-template-areas:
+    "hd"
+    "main";
+}
+
+.header {
+  grid-area: hd;
+}
+.content {
+  grid-area: main;
+}
