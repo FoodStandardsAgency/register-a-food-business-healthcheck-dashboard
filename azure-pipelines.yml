@@ -10,15 +10,15 @@ steps:
   - script: npm -v
     displayName: "Npm version"
 
-  - script: yarn
+  - script: npm install
     displayName: "Install dependencies"
 
-  - script: yarn build
+  - script: npm build
     displayName: "Yarn build"
 
-  - script: yarn --production
+  - script: npm --production
     displayName: "Prune dependencies"
-  
+
   - task: ArchiveFiles@2
     inputs:
       rootFolderOrFile: "$(System.DefaultWorkingDirectory)"
