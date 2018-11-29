@@ -4,12 +4,13 @@
   "private": true,
   "proxy": "http://localhost:4001",
   "dependencies": {
+    "concurrently": "^3.5.0",
     "node-fetch": "^2.2.0",
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.5",
-    "concurrently": "^3.5.0"
+    "react-scripts": "2.1.1",
+    "snyk": "^1.111.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -17,6 +18,10 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "server-start": "node server.js",
-    "dev": "concurrently --kill-others-on-fail \"npm run server-start\" \"npm run start\""
-  }
+    "dev": "concurrently --kill-others-on-fail \"npm run server-start\" \"npm run start\"",
+    "test:securityallWizard": "snyk wizard",
+    "test:securityWizard": "snyk wizard --severity-threshold=medium",
+    "test:security": "snyk auth && snyk test --severity-threshold=medium"
+  },
+  "license": "MIT"
 }
