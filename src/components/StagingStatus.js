@@ -61,6 +61,7 @@ class StagingStatus extends Component {
 
   componentDidMount() {
     const apiCall = this.apiCall;
+    apiCall();
     setInterval(apiCall, 30000);
   }
 
