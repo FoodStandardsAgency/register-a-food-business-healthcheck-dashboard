@@ -16,7 +16,7 @@ steps:
   - script: npm build
     displayName: "Yarn build"
 
-  - script: npm --production
+  - script: npm prune --production
     displayName: "Prune dependencies"
 
   - task: ArchiveFiles@2
