@@ -13,8 +13,8 @@ steps:
   - script: npm install
     displayName: "Install dependencies"
 
-  - script: npm build
-    displayName: "Yarn build"
+  - script: npm run build
+    displayName: "npm build"
 
   - script: npm prune --production
     displayName: "Prune dependencies"
