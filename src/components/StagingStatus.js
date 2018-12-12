@@ -53,10 +53,19 @@ class StagingStatus extends Component {
   }
 
   apiCall = async () => {
-    const response = await fetch("/detailed/staging");
-    const stagingData = await response.json();
-    console.log(stagingData);
-    this.setState({ stagingData });
+    try {
+      const response = await fetch("/detailed/staging");
+      const stagingData = await response.json();
+      console.log(stagingData);
+      this.setState({ stagingData });
+    } catch (err) {
+      const customError = new Error();
+      customError.name = "fetchErrorStagingDetailed";
+      customError.message = `Fetch to healthcheck backend /detailed/staging route failed with error: ${
+        err.message
+      }`;
+      console.error(customError);
+    }
   };
 
   componentDidMount() {
