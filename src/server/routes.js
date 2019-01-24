@@ -5,6 +5,7 @@ const { SECRET } = require("./config");
 const { authHandler } = require("./middleware/authHandler");
 const { getHealthcheckData } = require("./services/data");
 const { getStatusData } = require("./services/detailed");
+const { getRegistrationStats } = require("./services/registrations.service"); 
 
 module.exports = () => {
   const router = new Router();
@@ -25,7 +26,9 @@ module.exports = () => {
     try {
       await jwt.verify(req.cookies.token, SECRET);
       console.log("valid token");
-      res.send({message: "Some stats will go here"});
+      const registrationStats = await getRegistrationStats();
+      console.log(registrationStats);
+      res.send(registrationStats);
     } catch (err) {
       res.send({message: "Unauthorized"})
     }
