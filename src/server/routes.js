@@ -27,9 +27,9 @@ module.exports = () => {
       await jwt.verify(req.cookies.token, SECRET);
       console.log("valid token");
       const registrationStats = await getRegistrationStats();
-      console.log(registrationStats);
       res.send(registrationStats);
     } catch (err) {
+      console.log("invalid token");
       res.send({message: "Unauthorized"})
     }
   });
