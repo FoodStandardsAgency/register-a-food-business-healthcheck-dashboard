@@ -1,0 +1,12 @@
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: space-around;
+  justify-content: left;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.flex-box {
+  flex: 1 0 0;
+}

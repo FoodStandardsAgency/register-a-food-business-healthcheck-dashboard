@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { withCookies, Cookies } from 'react-cookie';
+import { withCookies } from 'react-cookie';
+import RegistrationStatsView from "./RegistrationStatsView";
 import LogIn from "./LogIn";
 
 class RegistrationStats extends Component {
@@ -13,20 +14,10 @@ class RegistrationStats extends Component {
       loading: true,
       token: cookies.get('token') || "",
       loggedIn: false,
-      registrationStats: "Loading..."
     };
-
   }
 
-  apiCall = async () => {
-    console.log("Registration stats called");
-    const response = await fetch("/registrationStats", { credentials: "include" });
-    const registrationStats = await response.json();
-    this.setState({ registrationStats });
-  };
-
   isLoggedIn = async () => {
-    console.log("isLoggedIn called");
     const response = await fetch("/isLoggedIn", { credentials: "include" });
     if (response.status === 200) {
       console.log("Logged in");
@@ -45,22 +36,13 @@ class RegistrationStats extends Component {
 
   componentDidMount() {
     this.isLoggedIn();
-    this.apiCall();
-    setInterval(this.apiCall, 30000);
   }
 
   render() {
     if (this.state.loading) {
       return (<h3>Loading...</h3>)
     }
-    return this.state.loggedIn ? (
-      <div className="flex-box">
-        <div className="front-end">
-          <h2> Registration Stats </h2>
-          {this.state.registrationStats.message}
-        </div>
-      </div>
-    ) : <LogIn />;
+    return ( this.state.loggedIn ? <RegistrationStatsView registrationStats={this.state.registrationStats}/> : <LogIn /> );
   }
 }
 
