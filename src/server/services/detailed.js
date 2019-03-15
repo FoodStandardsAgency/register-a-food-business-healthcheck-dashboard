@@ -1,4 +1,5 @@
 const fetch = require("node-fetch");
+const { getFrontEndStats } = require("./registrations.service");
 
 const testUrls = {
   statusPathFrontEnd:
@@ -22,13 +23,11 @@ const prodUrls = {
 
 const getProdStatus = async () => {
   const prodFrontendStatusData = {};
-  const frontEndStatusProd = await fetch(prodUrls.statusPathFrontEnd);
-  if (frontEndStatusProd.status === 200) {
-    prodFrontendStatusData.frontendStatus = `${frontEndStatusProd.status}`;
-    const frontEndStatusProdJson = await frontEndStatusProd.json();
-    for (let statusName in frontEndStatusProdJson) {
+  const frontEndStatusProd = await getFrontEndStats("prod");
+  if (frontEndStatusTest._id === "frontEndStatus") {
+    for (let statusName in frontEndStatusProd) {
       prodFrontendStatusData[statusName] = `${
-        frontEndStatusProdJson[statusName]
+        frontEndStatusProd[statusName]
       }`;
     }
   } else {
@@ -59,13 +58,11 @@ const getProdStatus = async () => {
 
 const getTestStatus = async () => {
   const testFrontendStatusData = {};
-  const frontEndStatusTest = await fetch(testUrls.statusPathFrontEnd);
-  if (frontEndStatusTest.status === 200) {
-    testFrontendStatusData.frontendStatus = `${frontEndStatusTest.status}`;
-    const frontEndStatusTestJson = await frontEndStatusTest.json();
-    for (let statusName in frontEndStatusTestJson) {
+  const frontEndStatusTest = await getFrontEndStats("test");
+  if (frontEndStatusTest._id === "frontEndStatus") {
+    for (let statusName in frontEndStatusTest) {
       testFrontendStatusData[statusName] = `${
-        frontEndStatusTestJson[statusName]
+        frontEndStatusTest[statusName]
       }`;
     }
   } else {
@@ -95,15 +92,11 @@ const getTestStatus = async () => {
 
 const getStagingStatus = async () => {
   const stagingFrontendStatusData = {};
-  const frontEndStatusStaging = await fetch(stagingUrls.statusPathFrontEnd);
-  if (frontEndStatusStaging.status === 200) {
-    stagingFrontendStatusData.frontendStatus = `${
-      frontEndStatusStaging.status
-    }`;
-    const frontEndStatusStagingJson = await frontEndStatusStaging.json();
-    for (let statusName in frontEndStatusStagingJson) {
+  const frontEndStatusStaging = await getFrontEndStats("staging");
+  if (frontEndStatusStaging._id === "frontEndStatus") {
+    for (let statusName in frontEndStatusStaging) {
       stagingFrontendStatusData[statusName] = `${
-        frontEndStatusStagingJson[statusName]
+        frontEndStatusStaging[statusName]
       }`;
     }
   } else {
