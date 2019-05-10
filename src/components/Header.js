@@ -33,6 +33,14 @@ const Header = () => (
         Prod Status
       </Link>
     </li>
+    <li className="listItem">
+      <Link
+        style={{ color: "white", textDecoration: "none" }}
+        to="/registration-stats"
+      >
+        Registration Stats
+      </Link>
+    </li>
   </ul>
 );
 
