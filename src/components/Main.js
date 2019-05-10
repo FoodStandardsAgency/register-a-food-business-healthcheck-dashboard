@@ -6,7 +6,7 @@ import StagingStatus from "./StagingStatus";
 import ProdStatus from "./ProdStatus";
 import RegistrationStats from "./RegistrationStats";
 
-// The Main component renders one of the three provided
+// The Main component renders one of the provided
 // Routes (provided that one matches). Both the /roster
 // and /schedule routes will match any pathname that starts
 // with /roster or /schedule. The / route will only match

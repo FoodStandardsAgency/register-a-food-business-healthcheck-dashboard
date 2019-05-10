@@ -29,6 +29,7 @@ module.exports = () => {
       const registrationStats = await getRegistrationStats();
       res.send(registrationStats);
     } catch (err) {
+      console.log(err);
       console.log("invalid token");
       res.send({message: "Unauthorized"})
     }

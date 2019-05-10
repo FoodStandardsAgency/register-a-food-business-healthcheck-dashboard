@@ -3,6 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:4001",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "server-start": "node server.js",
+    "dev": "concurrently --kill-others-on-fail \"npm run server-start\" \"npm run start\"",
+    "test:securityallWizard": "snyk wizard",
+    "test:securityWizard": "snyk wizard --severity-threshold=medium",
+    "test:security": "snyk auth && snyk test --severity-threshold=medium"
+  },
   "dependencies": {
     "body-parser": "^1.18.3",
     "concurrently": "^3.5.0",
@@ -10,7 +21,7 @@
     "date-fns": "^1.30.1",
     "dotenv": "^6.2.0",
     "emotion": "9.2.12",
-    "govuk-react": "^0.5.0",
+    "govuk-react": "0.3.1",
     "jsonwebtoken": "^8.4.0",
     "node-fetch": "^2.2.0",
     "pg": "^7.8.0",
@@ -23,16 +34,8 @@
     "sequelize": "^4.42.0",
     "snyk": "^1.134.0"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "server-start": "node server.js",
-    "dev": "concurrently --kill-others-on-fail \"npm run server-start\" \"npm run start\"",
-    "test:securityallWizard": "snyk wizard",
-    "test:securityWizard": "snyk wizard --severity-threshold=medium",
-    "test:security": "snyk auth && snyk test --severity-threshold=medium"
+  "devDependencies": {
+    "react-markdown": "3.3.2"
   },
   "license": "MIT",
   "browserslist": [
