@@ -65,7 +65,7 @@ class RegistrationStatsView extends Component {
           <div className="flex-box">
             <div>
               <h2>Show registrations from the last: </h2>
-              <Radio name="timeFilter" value="0" onChange={this.handleCheckBoxChange}>Forever</Radio>
+              <Radio name="timeFilter" value="0" defaultChecked="true" onChange={this.handleCheckBoxChange}>Forever</Radio>
               <Radio name="timeFilter" value="24" onChange={this.handleCheckBoxChange}>24 hours</Radio>
               <Radio name="timeFilter" value="168" onChange={this.handleCheckBoxChange}>7 days</Radio>
               <Radio name="timeFilter" value="720" onChange={this.handleCheckBoxChange}>1 month</Radio>

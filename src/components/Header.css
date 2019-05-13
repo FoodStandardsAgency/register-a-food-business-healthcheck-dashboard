@@ -19,9 +19,13 @@
   text-align: center;
 }
 
-.listItem .a {
+.listItem a {
   color: white;
   text-align: center;
+  text-decoration: none;
+}
+.listItem a:hover {
+  color: green;
 }
 
 .linkItem {
