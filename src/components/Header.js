@@ -8,21 +8,10 @@ const Header = () => (
       <Link to="/">Home</Link>
     </li>
     <li className="listItem">
-      <Link to="/test-status">Test Status</Link>
+      <Link to="/status">Status</Link>
     </li>
     <li className="listItem">
-      <Link to="/staging-status">Staging Status</Link>
-    </li>
-    <li className="listItem">
-      <Link to="/prod-status">Prod Status</Link>
-    </li>
-    <li className="listItem">
-      <Link
-        style={{ color: "white", textDecoration: "none" }}
-        to="/registration-stats"
-      >
-        Registration Stats
-      </Link>
+      <Link to="/registration-stats">Registration Stats</Link>
     </li>
   </ul>
 );

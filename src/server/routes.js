@@ -15,9 +15,8 @@ module.exports = () => {
     res.send(response);
   });
 
-  router.get("/detailed/:env", async (req, res) => {
-    // EITHER: dev, test, prod or staging
-    const response = await getStatusData(req.params.env);
+  router.get("/detailed", async (req, res) => {
+    const response = await getStatusData();
     res.send(response);
   });
 

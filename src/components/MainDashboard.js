@@ -6,28 +6,18 @@ class MainDashboard extends Component {
   constructor() {
     super();
     this.state = {
-      allData: {
-        testData: {
-          frontEndHealthcheck: "LOADING",
-          backEndHealthcheck: "LOADING"
-        },
-        stagingData: {
-          frontEndHealthcheck: "LOADING",
-          backEndHealthcheck: "LOADING"
-        },
-        prodData: {
-          frontEndHealthcheck: "LOADING",
-          backEndHealthcheck: "LOADING"
-        }
+      pingData: {
+        frontEndHealthcheck: "LOADING",
+        backEndHealthcheck: "LOADING"
       }
     };
   }
 
   apiCall = async () => {
     const response = await fetch("/data");
-    const allData = await response.json();
-    console.log(allData);
-    this.setState({ allData });
+    const pingData = await response.json();
+    console.log(pingData);
+    this.setState({ pingData });
   };
 
   componentDidMount() {
@@ -42,26 +32,10 @@ class MainDashboard extends Component {
     return (
       <div className="grid-container">
         <MainDashboardCard
-          title="Testing"
-          frontendHealthcheck={this.state.allData.testData.frontEndHealthcheck}
-          backendHealthcheck={this.state.allData.testData.backEndHealthcheck}
-          href="/test-status"
-          onClick={this.handleClick}
-        />
-        <MainDashboardCard
-          title="Staging"
-          frontendHealthcheck={
-            this.state.allData.stagingData.frontEndHealthcheck
-          }
-          backendHealthcheck={this.state.allData.stagingData.backEndHealthcheck}
-          href="/staging-status"
-          onClick={this.handleClick}
-        />
-        <MainDashboardCard
-          title="Production"
-          frontendHealthcheck={this.state.allData.prodData.frontEndHealthcheck}
-          backendHealthcheck={this.state.allData.prodData.backEndHealthcheck}
-          href="/prod-status"
+          title="General Status"
+          frontendHealthcheck={this.state.pingData.frontEndHealthcheck}
+          backendHealthcheck={this.state.pingData.backEndHealthcheck}
+          href="/status"
           onClick={this.handleClick}
         />
       </div>

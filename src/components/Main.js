@@ -1,9 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import MainDashboard from "./MainDashboard";
-import TestStatus from "./TestStatus";
-import StagingStatus from "./StagingStatus";
-import ProdStatus from "./ProdStatus";
+import Status from "./Status";
 import RegistrationStats from "./RegistrationStats";
 
 // The Main component renders one of the provided
@@ -15,9 +13,7 @@ const Main = () => (
   <main>
     <Switch>
       <Route exact path="/" component={MainDashboard} />
-      <Route path="/test-status" component={TestStatus} />
-      <Route path="/staging-status" component={StagingStatus} />
-      <Route path="/prod-status" component={ProdStatus} />
+      <Route path="/status" component={Status} />
       <Route path="/registration-stats" component={RegistrationStats} />
     </Switch>
   </main>

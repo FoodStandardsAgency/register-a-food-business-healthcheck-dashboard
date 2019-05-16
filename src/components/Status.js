@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { StatusTable } from "./StatusTable";
-import "./TestStatus.css";
+import "./Status.css";
 
-class TestStatus extends Component {
+class Status extends Component {
   constructor() {
     super();
     this.state = {
-      testData: {
-        testFrontendStatusData: {
+      statusData: {
+        frontendStatusData: {
           frontendStatus: "Loading",
           registrationsStarted: "Loading",
           submissionsSucceeded: "Loading",
@@ -18,7 +18,7 @@ class TestStatus extends Component {
           addressLookupsFailed: "Loading",
           mostRecentAddressLookupSucceeded: "Loading"
         },
-        testBackendStatusData: {
+        backendStatusData: {
           backendStatus: "Loading",
           submissionsReceived: "Loading",
           authenticationsPassed: "Loading",
@@ -53,10 +53,10 @@ class TestStatus extends Component {
   }
 
   apiCall = async () => {
-    const response = await fetch("/detailed/test");
-    const testData = await response.json();
-    console.log(testData);
-    this.setState({ testData });
+    const response = await fetch("/detailed");
+    const statusData = await response.json();
+    console.log(statusData);
+    this.setState({ statusData });
   };
 
   componentDidMount() {
@@ -70,15 +70,15 @@ class TestStatus extends Component {
       <div className="flex-box">
         <div className="front-end">
           <h2> Front end </h2>
-          <StatusTable data={this.state.testData.testFrontendStatusData} />
+          <StatusTable data={this.state.statusData.frontendStatusData} />
         </div>
         <div className="back-end">
           <h2> Back end </h2>
-          <StatusTable data={this.state.testData.testBackendStatusData} />
+          <StatusTable data={this.state.statusData.backendStatusData} />
         </div>
       </div>
     );
   }
 }
 
-export default TestStatus;
+export default Status;
