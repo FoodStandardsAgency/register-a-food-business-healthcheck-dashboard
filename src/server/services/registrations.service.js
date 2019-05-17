@@ -7,8 +7,8 @@ const getRegistrationStats = async () => {
   return registrations.map(registration => ({ council: registration.council, createdAt: registration.createdAt }));
 };
 
-const getFrontEndStats = async () => {
-  return getStoredStatus(STATUS_DB);
+const getStoredStats = async id => {
+  return getStoredStatus(STATUS_DB, id);
 }
 
-module.exports = { getRegistrationStats, getFrontEndStats };
+module.exports = { getRegistrationStats, getStoredStats };

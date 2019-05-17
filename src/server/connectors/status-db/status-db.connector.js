@@ -32,11 +32,11 @@ const establishConnectionToMongo = async (statusDbUrl) => {
  * *
  * @returns {object} All status values
  */
-const getStoredStatus = async (statusDbUrl) => {
+const getStoredStatus = async (statusDbUrl, id) => {
   try {
     await establishConnectionToMongo(statusDbUrl);
     const storedStatus = await statusCollection.findOne({
-      _id: "frontEndStatus"
+      _id: id
     });
 
     return storedStatus;

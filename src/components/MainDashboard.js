@@ -32,7 +32,7 @@ class MainDashboard extends Component {
     return (
       <div className="grid-container">
         <MainDashboardCard
-          title="General Status"
+          title="Ping Status"
           frontendHealthcheck={this.state.pingData.frontEndHealthcheck}
           backendHealthcheck={this.state.pingData.backEndHealthcheck}
           href="/status"

@@ -1,30 +1,13 @@
 const fetch = require("node-fetch");
-const { getFrontEndStats } = require("./registrations.service");
+const { getStoredStats } = require("./registrations.service");
 
-const testUrls = {
-  statusPathFrontEnd:
-    "https://test-register-a-food-business.azurewebsites.net/status/all",
-  statusPathBackEnd:
-    "https://test-register-a-food-business-service.azurewebsites.net/api/status/all"
-};
-
-const stagingUrls = {
-  statusPathFrontEnd:
-    "https://staging-register-a-food-business.azurewebsites.net/status/all",
-  statusPathBackEnd:
-    "https://staging-register-a-food-business-service.azurewebsites.net/api/status/all"
-};
-const prodUrls = {
-  statusPathFrontEnd:
-    "https://prod-register-a-food-business.azurewebsites.net/status/all",
-  statusPathBackEnd:
-    "https://prod-register-a-food-business-service.azurewebsites.net/api/status/all"
-};
+const frontEndID = "frontEndStatus";
+const backEndID = "backEndStatus";
 
 const getStatus = async () => {
   const frontendStatusData = {};
-  const frontEndStatus = await getFrontEndStats();
-  if (frontEndStatus && frontEndStatus._id === "frontEndStatus") {
+  const frontEndStatus = await getStoredStats(frontEndID);
+  if (frontEndStatus && frontEndStatus._id === frontEndID) {
     for (let statusName in frontEndStatus) {
       frontendStatusData[statusName] = `${
         frontEndStatus[statusName]
@@ -37,19 +20,19 @@ const getStatus = async () => {
   }
 
   const backendStatusData = {};
-  const backEndStatus = await fetch(prodUrls.statusPathBackEnd);
-  if (backEndStatus.status === 200) {
-    backendStatusData.backendStatus = `${backEndStatus.status}`;
-    const backEndStatusJson = await backEndStatus.json();
-    console.log(backEndStatusJson);
-    for (let statusName in backEndStatusJson) {
+  const backEndStatus = await getStoredStats(backEndID);
+  if (backEndStatus && backEndStatus._id === backEndID) {
+    for (let statusName in backEndStatus) {
       backendStatusData[statusName] = `${
-        backEndStatusJson[statusName]
+        backEndStatus[statusName]
       }`;
     }
+  } else if (backEndStatus) {
+    backendStatusData.frontendStatus = `${backEndStatus.status}`;
   } else {
-    backendStatusData.backendStatus = `${backEndStatus.status}`;
+    console.log("unable to get data")
   }
+  
   const statusData = {
     frontendStatusData,
     backendStatusData
