@@ -1,9 +1,9 @@
 require("dotenv").config();
 
 module.exports = {
-  USERNAME: process.env.USERNAME,
-  PASSWORD: process.env.PASSWORD,
-  SECRET: process.env.SECRET,
+  WEBSITE_USERNAME: process.env.WEBSITE_USERNAME,
+  WEBSITE_PASSWORD: process.env.WEBSITE_PASSWORD,
+  COOKIE_SECRET: process.env.COOKIE_SECRET,
   POSTGRES_USER: process.env.POSTGRES_USER,
   POSTGRES_PASS: process.env.POSTGRES_PASS,
   POSTGRES_DB: process.env.POSTGRES_DB,

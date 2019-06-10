@@ -1,6 +1,6 @@
 jest.mock("../config", () => ({
-  USERNAME: "username",
-  PASSWORD: "password"
+  WEBSITE_USERNAME: "username",
+  WEBSITE_PASSWORD: "password"
 }));
 
 const { authHandler } = require("./authHandler");

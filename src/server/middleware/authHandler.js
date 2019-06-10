@@ -1,11 +1,11 @@
-const { USERNAME, PASSWORD } = require("../config");
+const { WEBSITE_USERNAME, WEBSITE_PASSWORD } = require("../config");
 
 const validateUsername = (username) => {
-  return USERNAME === username;
+  return WEBSITE_USERNAME === username;
 }
 
 const validatePassword = (password) => {
-  return PASSWORD === password;
+  return WEBSITE_PASSWORD === password;
 }
 
 const authHandler = (req, res, next) => {
