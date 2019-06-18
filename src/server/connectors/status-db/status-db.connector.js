@@ -13,7 +13,7 @@ let statusCollection;
  * Sets up a connection to the status collection in the config database.
  * The client, configDB and statusCollection variables are accessible to other functions in this connector.
  */
-const establishConnectionToMongo = async (statusDbUrl) => {
+const establishConnectionToMongo = async statusDbUrl => {
   if (process.env.DOUBLE_MODE === "true") {
     statusCollection = statusCollectionDouble;
   } else {
@@ -33,6 +33,7 @@ const establishConnectionToMongo = async (statusDbUrl) => {
  * @returns {object} All status values
  */
 const getStoredStatus = async (statusDbUrl, id) => {
+  console.log("status-db.connector.js getStoredStatus called");
   try {
     await establishConnectionToMongo(statusDbUrl);
     const storedStatus = await statusCollection.findOne({

@@ -5,34 +5,31 @@ const frontEndID = "frontEndStatus";
 const backEndID = "backEndStatus";
 
 const getStatus = async () => {
+  console.log("detailed.js getStatus called");
   const frontendStatusData = {};
   const frontEndStatus = await getStoredStats(frontEndID);
   if (frontEndStatus && frontEndStatus._id === frontEndID) {
     for (let statusName in frontEndStatus) {
-      frontendStatusData[statusName] = `${
-        frontEndStatus[statusName]
-      }`;
+      frontendStatusData[statusName] = `${frontEndStatus[statusName]}`;
     }
   } else if (frontEndStatus) {
     frontendStatusData.frontendStatus = `${frontEndStatus.status}`;
   } else {
-    console.log("unable to get data")
+    console.log("unable to get data");
   }
 
   const backendStatusData = {};
   const backEndStatus = await getStoredStats(backEndID);
   if (backEndStatus && backEndStatus._id === backEndID) {
     for (let statusName in backEndStatus) {
-      backendStatusData[statusName] = `${
-        backEndStatus[statusName]
-      }`;
+      backendStatusData[statusName] = `${backEndStatus[statusName]}`;
     }
   } else if (backEndStatus) {
     backendStatusData.frontendStatus = `${backEndStatus.status}`;
   } else {
-    console.log("unable to get data")
+    console.log("unable to get data");
   }
-  
+
   const statusData = {
     frontendStatusData,
     backendStatusData
@@ -42,6 +39,7 @@ const getStatus = async () => {
 };
 
 const getStatusData = async () => {
+  console.log("detailed.js getStatusData called");
   return getStatus();
 };
 // setInterval(getStatusData, 300);
