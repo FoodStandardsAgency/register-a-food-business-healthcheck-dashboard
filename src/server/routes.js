@@ -1,43 +1,47 @@
 const { Router } = require("express");
-var jwt = require('jsonwebtoken');
+var jwt = require("jsonwebtoken");
 
-const { SECRET } = require("./config");
+const { COOKIE_SECRET } = require("./config");
 const { authHandler } = require("./middleware/authHandler");
 const { getHealthcheckData } = require("./services/data");
 const { getStatusData } = require("./services/detailed");
-const { getRegistrationStats } = require("./services/registrations.service"); 
+const { getRegistrationStats } = require("./services/registrations.service");
 
 module.exports = () => {
   const router = new Router();
 
   router.get("/data", async (req, res) => {
+    console.log("data route called");
     const response = await getHealthcheckData();
     res.send(response);
   });
 
-  router.get("/detailed/:env", async (req, res) => {
-    // EITHER: dev, test, prod or staging
-    const response = await getStatusData(req.params.env);
+  router.get("/detailed", async (req, res) => {
+    console.log("detailed route called");
+    const response = await getStatusData();
     res.send(response);
   });
 
   router.get("/registrationStats", async (req, res) => {
     console.log("registrationStats route called");
     try {
-      await jwt.verify(req.cookies.token, SECRET);
+      await jwt.verify(req.cookies.token, COOKIE_SECRET);
       console.log("valid token");
       const registrationStats = await getRegistrationStats();
       res.send(registrationStats);
     } catch (err) {
       console.log(err);
       console.log("invalid token");
-      res.send({message: "Unauthorized"})
+      res.send({ message: "Unauthorized" });
     }
   });
 
   router.post("/login", authHandler, (req, res) => {
+    console.log("login route called");
     // Everything at this point is authenticated
-    var token = jwt.sign({ username: req.body.username }, SECRET, { expiresIn: "24h" });
+    var token = jwt.sign({ username: req.body.username }, COOKIE_SECRET, {
+      expiresIn: "24h"
+    });
     res.cookie("token", token);
     res.redirect("/registration-stats");
   });
@@ -45,7 +49,7 @@ module.exports = () => {
   router.get("/isLoggedIn", async (req, res) => {
     console.log("isLoggedIn route called");
     try {
-      await jwt.verify(req.cookies.token, SECRET);
+      await jwt.verify(req.cookies.token, COOKIE_SECRET);
       console.log("Valid token");
       res.status(200);
       res.send("User is logged in");
@@ -57,4 +61,4 @@ module.exports = () => {
   });
 
   return router;
-}
+};

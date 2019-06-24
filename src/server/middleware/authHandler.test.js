@@ -1,12 +1,12 @@
 jest.mock("../config", () => ({
-  USERNAME: "username",
-  PASSWORD: "password"
+  DASHBOARD_USERNAME: "username",
+  DASHBOARD_PASSWORD: "password"
 }));
 
 const { authHandler } = require("./authHandler");
 
 describe("Function: authHandler", () => {
-  let next = jest.fn()
+  let next = jest.fn();
   let res = {
     redirect: jest.fn()
   };
@@ -17,7 +17,7 @@ describe("Function: authHandler", () => {
         body: {
           username: "bad username"
         }
-      }
+      };
       authHandler(req, res);
     });
     test("Should: redirect to registration-stats", () => {
@@ -31,7 +31,7 @@ describe("Function: authHandler", () => {
         body: {
           password: "bad password"
         }
-      }
+      };
       authHandler(req, res);
     });
     test("Should: redirect to registration-stats", () => {
@@ -46,7 +46,7 @@ describe("Function: authHandler", () => {
           username: "username",
           password: "password"
         }
-      }
+      };
       authHandler(req, res, next);
     });
     test("Should: call next", () => {
