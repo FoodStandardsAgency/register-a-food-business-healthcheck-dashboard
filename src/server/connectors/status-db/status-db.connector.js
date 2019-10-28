@@ -17,12 +17,21 @@ const establishConnectionToMongo = async statusDbUrl => {
   if (process.env.DOUBLE_MODE === "true") {
     statusCollection = statusCollectionDouble;
   } else {
-    client = await mongodb.MongoClient.connect(statusDbUrl, {
-      useNewUrlParser: true
-    });
+    // If no connection or connection is not valid after downtime
+    if (!client || !client.topology || !client.topology.isConnected()) {
+      try {
+        if (client && client.topology !== undefined) {
+          client.close();
+        }
+        client = await mongodb.MongoClient.connect(statusDbUrl, {
+          useNewUrlParser: true
+        });
+      } catch (err) {
+        throw err;
+      }
+    }
 
     statusDB = client.db("register_a_food_business_status");
-
     statusCollection = statusDB.collection("status");
   }
 };
@@ -50,4 +59,10 @@ const getStoredStatus = async (statusDbUrl, id) => {
   }
 };
 
-module.exports = { getStoredStatus };
+const clearMongoConnection = () => {
+  client = undefined;
+  statusDB = undefined;
+  statusCollection = undefined;
+};
+
+module.exports = { getStoredStatus, clearMongoConnection };
